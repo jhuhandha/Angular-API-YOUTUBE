@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html ng-app="githubViewer">
+
+  <head>
+    
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js"></script>
+    <script src="github.js"></script>
+  </head>
+
+  <body ng-controller="MainController">
+    <h1>{{message}}</h1>
+    <div>
+      {{error}}
+    </div>
+
+        {{username}}
+        <form name="searchUser">
+      <input type="search" placeholder="Username" ng-model="username" />
+      <input type="submit" value="Search" ng-click="search(username)" />
+    </form>
+    <div ng-show="datosView">
+      <div>
+        <h2>
+          {{user.name}} <br>
+          <small>{{user.location}} </small>
+        </h2>
+        <img ng-src="{{user.avatar_url}}" title="{{user.name}}" />
+      </div>
+      Order:
+      <select ng-model="SortOrder">
+        <option value="+name">+ Name</option>
+        <option value="-name">- Name</option>
+        <option value="+language">+ Language</option>
+        <option value="-language">- Language</option>
+      </select>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Lenguaje</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="r in repos | orderBy:SortOrder">
+            <td>{{r.name}}</td>
+            <td>{{r.language}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+
+</html>
